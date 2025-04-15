@@ -37,4 +37,6 @@ export default function createMoneyWindows(scene) {
   scene.add.existing(moneyWindowSizer);
 
   moneyWindowSizer.layout();
+
+  return moneyWindowSizer
 }
