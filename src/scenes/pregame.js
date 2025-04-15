@@ -4,6 +4,9 @@ import inventory from "../data/inventory";
 import { gameDificulty, startMoney } from "../data/globals";
 import Window from "../objects/ui/window";
 import MoneyWindow from "../objects/ui/moneyWindow";
+import { Sizer } from "phaser3-rex-plugins/templates/ui/ui-components.js";
+import createItemBox from "../objects/ui/itemBox";
+import createMoneyWindows from "../objects/ui/moneyWindow";
 
 export default class Pregame extends Phaser.Scene {
     constructor() {
@@ -14,6 +17,7 @@ export default class Pregame extends Phaser.Scene {
         // load the close button image
         this.load.image("close", "assets/images/ui/close.png");
         this.load.image("coin", "assets/images/ui/coin.png");
+        this.load.image("item", "assets/images/items/Shirt_00.png");
     }
 
     create() {
@@ -34,16 +38,19 @@ export default class Pregame extends Phaser.Scene {
             // get a random item from the itensCategories array
             let randomCategory = itensCategories[Math.floor(Math.random() * itensCategories.length)];
 
-            console.log(randomCategory)
-
             // get a random item from itens list based on category
             let randomItem = items.find(item => item.category == randomCategory.name)
 
             inventory.addItem(randomItem)
         }
 
-        // add a text to the center of the screen
-        const introText = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY - 200, "Welcome to your first day, this is your inventory, choose 5 items to sell this day, this items gonna be your selling options for your next negotiations", {
+        
+        createMoneyWindows(this)
+
+        createItemBox(this)
+
+       /*  // add a text to the center of the screen
+        const introText = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY - 200, "Welcome to your first day, this is your inventory, choose 5 items to sell this day, this items gonna be your selling options for your next negotiations, click on the items to add them to your store showcase", {
                 fontSize: "32px",
                 fill: "#fff",
                 backgroundColor: "#000",
@@ -54,7 +61,7 @@ export default class Pregame extends Phaser.Scene {
 
 
         // create the inventory windows
-        const inventoryWindow = new Window(this, this.cameras.main.centerX, this.cameras.main.centerY + 100, 360, 240);
+        const inventoryWindow = new Window(this, this.cameras.main.centerX, this.cameras.main.centerY + 100, 360, 240, false);
 
         inventoryWindow.setVisible(false)
 
@@ -96,6 +103,23 @@ export default class Pregame extends Phaser.Scene {
             },
             callbackScope: this
         });
+
+        // temporary items array
+        const itemsArray = [];
+
+        // create a item sprite for each item in the inventory
+        inventory.items.forEach(item => {
+            // create a item sprite for each item
+            const itemSprite = this.add.image(0, 0, "item").setOrigin(0.5, 0.5).setScale(0.5);
+            itemSprite.setInteractive({ useHandCursor: true })
+            // add the item sprite to the items array
+            itemsArray.push(itemSprite)
+
+        })
+
+        // add a item box on the bottom of the game screen
+        const bottomItemBox = new ItemBox(this, this.cameras.main.centerX, this.cameras.main.height - 100,  itemsArray );  */
+        
         
     }
 
