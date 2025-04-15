@@ -2,6 +2,7 @@ import itensCategories from "../data/itemCategories.json";
 import items from "../data/items.json";
 import inventory from "../data/inventory";
 import { gameDificulty } from "../data/globals";
+import Window from "../objects/ui/window";
 
 export default class Pregame extends Phaser.Scene {
     constructor() {
@@ -9,6 +10,11 @@ export default class Pregame extends Phaser.Scene {
     }
 
     preload() {
+        // load the close button image
+        this.load.image("close", "assets/images/ui/close.png");
+    }
+
+    create() {
 
         let maxInventory = 0
 
@@ -34,13 +40,56 @@ export default class Pregame extends Phaser.Scene {
             inventory.addItem(randomItem)
         }
 
-    }
+        // add a text to the center of the screen
+        const introText = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY - 200, "Welcome to your first day, this is your inventory, choose 5 items to sell this day, this items gonna be your selling options for your next negotiations", {
+                fontSize: "32px",
+                fill: "#fff",
+                backgroundColor: "#000",
+                // set the wraping 
+                wordWrap: { width: 1000, useAdvancedWrap: true },
+            })
+            .setOrigin(0.5, 0.5);
 
-    create() {
+
+        // create the inventory windows
+        const inventoryWindow = new Window(this, this.cameras.main.centerX, this.cameras.main.centerY + 100, 480, 320);
+
+        const inventoryText = this.add.text(0,0, "Inventory", {
+            fontSize: "32px",
+            fill: "#fff",
+            // set the wraping 
+            wordWrap: { width: 1000, useAdvancedWrap: true },
+        })
+
+        inventoryWindow.addItem(inventoryText)
+
+        // add a timer to remove the tutorial text and push the window up
+        this.time.addEvent({
+            delay: 5000,
+            callback: () => {
+                this.tweens.add({
+                    targets: introText,
+                    alpha: 0,
+                    duration: 1000,
+                    onComplete: () => {
+                        introText.destroy();
+                    }
+                });
+
+                this.tweens.add({
+                    targets: inventoryWindow,
+                    y: this.cameras.main.centerY - 50,
+                    duration: 1000,
+                });
+
+               
+            },
+            callbackScope: this
+        });
         
     }
 
     update() {
-
+        
     }
  }
