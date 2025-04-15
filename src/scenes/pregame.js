@@ -1,10 +1,6 @@
 import Phaser from "phaser";
-import createItemBox from "../objects/ui/itemBox";
 import createMoneyWindow from "../objects/ui/moneyWindow";
-import createInventoryWindow from "../objects/ui/inventoryWindow";
 import Link from "../objects/ui/link";
-import createNewInventoryWindow from "../objects/ui/newInventoryWindow";
-import createNewShowCaseWindow from "../objects/ui/createNewShowCaseWindow";
 import InventoryWindow from "../objects/ui/newInventoryWindow";
 import ShowCaseWindow from "../objects/ui/newShowCaseWidnow";
 
