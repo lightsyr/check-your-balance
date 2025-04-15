@@ -1,0 +1,43 @@
+[
+    {
+        "id": 1,
+        "name": "Weapons"
+    },
+    {
+        "id":2,
+        "name": "Armor"
+    },
+    {
+        "id":3,
+        "name": "Consumables"
+    },
+    {
+        "id":4,
+        "name": "Miscellaneous"
+    },
+    {
+        "id":5,
+        "name": "Quest Items"
+    },
+    {
+        "id":6,
+        "name": "Crafting Materials"
+    },
+    {
+        "id":7,
+        "name": "Tools"
+    },
+    {
+        "id":8,
+        "name": "Potions"
+    },
+    {
+        "id":9,
+        "name": "Food"
+    },
+    {
+        "id":10,
+        "name": "Clothing"
+    }
+
+]

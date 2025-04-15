@@ -1,0 +1,82 @@
+[
+    {
+        "id": 1,
+        "name": "Iron Sword",
+        "description": "A basic iron sword, suitable for beginners.",
+        "value": 10,
+        "rarity": "common",
+        "category": "Weapons"
+    },
+    {
+        "id": 2,
+        "name": "Leather Armor",
+        "description": "Lightweight armor made from hardened leather.",
+        "value": 12,
+        "rarity": "common",
+        "category": "Armor"
+    },
+    {
+        "id": 3,
+        "name": "Health Elixir",
+        "description": "Restores a small amount of health when consumed.",
+        "value": 8,
+        "rarity": "common",
+        "category": "Consumables"
+    },
+    {
+        "id": 4,
+        "name": "Old Coin",
+        "description": "A strange coin from an unknown origin.",
+        "value": 3,
+        "rarity": "uncommon",
+        "category": "Miscellaneous"
+    },
+    {
+        "id": 5,
+        "name": "Ancient Relic",
+        "description": "A mysterious artifact needed to complete a quest.",
+        "value": 0,
+        "rarity": "rare",
+        "category": "Quest Items"
+    },
+    {
+        "id": 6,
+        "name": "Iron Ore",
+        "description": "Basic material used in weapon and armor crafting.",
+        "value": 4,
+        "rarity": "common",
+        "category": "Crafting Materials"
+    },
+    {
+        "id": 7,
+        "name": "Pickaxe",
+        "description": "Used to mine ores from rocks.",
+        "value": 10,
+        "rarity": "common",
+        "category": "Tools"
+    },
+    {
+        "id": 8,
+        "name": "Mana Potion",
+        "description": "Restores a small amount of mana.",
+        "value": 5,
+        "rarity": "common",
+        "category": "Potions"
+    },
+    {
+        "id": 9,
+        "name": "Bread",
+        "description": "A loaf of bread to stave off hunger.",
+        "value": 2,
+        "rarity": "common",
+        "category": "Food"
+    },
+    {
+        "id": 10,
+        "name": "Traveler's Cloak",
+        "description": "A cloak that protects from wind and rain.",
+        "value": 6,
+        "rarity": "common",
+        "category": "Clothing"
+    }
+]

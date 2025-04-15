@@ -30,7 +30,7 @@ export default class Menu extends Phaser.Scene {
         backgroundColor: "#000",
       },
       () => {
-        this.scene.start("Game");
+        this.scene.start("Pregame");
       }
     );
   }
