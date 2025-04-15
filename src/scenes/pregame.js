@@ -7,6 +7,7 @@ import { Sizer } from "phaser3-rex-plugins/templates/ui/ui-components.js";
 import createItemBox from "../objects/ui/itemBox";
 import createMoneyWindow from "../objects/ui/moneyWindow";
 import createInventoryWindow from "../objects/ui/inventoryWindow";
+import Link from "../objects/ui/link";
 
 export default class Pregame extends Phaser.Scene {
   constructor() {
@@ -20,32 +21,22 @@ export default class Pregame extends Phaser.Scene {
   }
 
   create() {
-    const inventorySizes = {
-      easy: 15,
-      normal: 10,
-      hard: 5,
-    };
-
-    const maxInventory = inventorySizes[gameDificulty] || 10;
-
-    for (let i = 1; i <= maxInventory; i++) {
-      let randomCategory =
-        itemCategories[Math.floor(Math.random() * itemCategories.length)];
-
-      let randomItem = items.find(
-        (item) => item.category === randomCategory.name
-      );
-
-      if (randomItem) {
-        inventory.addItem(randomItem);
-      }
-    }
+   
 
     const inventoryWindow = createInventoryWindow(this, 640, 320);
-    const moneyWindow = createMoneyWindow(this);
     const itemBox = createItemBox(this, inventoryWindow);
 
-    
+    inventoryWindow.setItemBox(itemBox);
+
+    // Renderiza os dois arrays globais (ordem correta agora!)
+    itemBox.mount(); // showCase vem para cá
+    inventoryWindow.mount(); // e inventory aqui
+
+    const moneyWindow = createMoneyWindow(this);
+
+    const goGameLink = new Link(this, 640, 120, "Confirm and to Menu", {}, () => {
+      this.scene.start("Menu");
+    });
   }
 
   update() {}

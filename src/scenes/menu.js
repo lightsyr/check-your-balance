@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import Link from "../objects/ui/link";
+import { initializeGameState } from "../data/startup";
 
 export default class Menu extends Phaser.Scene {
   constructor() {
@@ -9,6 +10,9 @@ export default class Menu extends Phaser.Scene {
   preload() {}
 
   create() {
+    // inicializa o estado do jogo
+    initializeGameState()
+
     // add a text to the center of the screen
     this.add
       .text(this.cameras.main.centerX, this.cameras.main.centerY, "Menu", {

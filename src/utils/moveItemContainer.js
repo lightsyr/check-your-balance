@@ -1,3 +1,5 @@
+import inventory from "../data/inventory";
+
 /**
  * Mover o contêiner de um item de um sizer para outro, e vice-versa
  * @param {Phaser.GameObjects.Container} itemContainer - O contêiner que envolve o item.
@@ -15,6 +17,8 @@ export function moveItemContainer(itemContainer, fromSizer, toSizer) {
     toSizer.remove(itemContainer);
     fromSizer.add(itemContainer);
   }
+
+ 
 
   // Atualiza os layouts de ambos os sizers após mover o item
   fromSizer.layout();
