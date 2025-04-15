@@ -7,6 +7,19 @@ import { createVisualItem } from "../../utils/createVisualItem";
 
 
 export default function createItemBox(scene, inventoryWindowSizer) {
+  
+  const mainContainer = new Sizer(scene, {
+    x: 1280 / 2,
+    y: 720 / 2 + 200,
+    width: 600,
+    height: 200,
+    orientation: 1, // Use 1 ao invés de "vertical"
+    anchor: "center",
+    space: {
+      item: 10
+    }
+  });
+  
   const itemsBoxSizer = new Sizer(scene, {
     x: 1280 / 2,
     y: 720 - 60,
@@ -16,8 +29,19 @@ export default function createItemBox(scene, inventoryWindowSizer) {
       item: 20,
     },
   });
+  
+  const titleLabel = new Label(scene, {
+    align: "center",
+    text: scene.add.text(0, 0, "Showcase", {
+      fontSize: "20px",
+      color: "#ffffff",
+    }),
+  });
+  
+  mainContainer.add(titleLabel)
+  mainContainer.add(itemsBoxSizer)
 
-  scene.add.existing(itemsBoxSizer);
+  scene.add.existing(mainContainer);
 
   itemsBoxSizer.mount = () => {
     itemsBoxSizer.removeAll(true);
@@ -32,7 +56,7 @@ export default function createItemBox(scene, inventoryWindowSizer) {
       itemsBoxSizer.add(itemContainer);
     });
 
-    itemsBoxSizer.layout();
+    mainContainer.layout();
   };
 
   return itemsBoxSizer;

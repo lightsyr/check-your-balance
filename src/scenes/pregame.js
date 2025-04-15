@@ -18,10 +18,13 @@ export default class Pregame extends Phaser.Scene {
     this.load.image("close", "assets/images/ui/close.png");
     this.load.image("coin", "assets/images/ui/coin.png");
     this.load.image("item", "assets/images/items/Shirt_00.png");
+    this.load.image("store_bg", "assets/images/backgrounds/store.png");
   }
 
   create() {
-   
+
+    // add background image
+    this.add.image(0, 0, "store_bg").setOrigin(0, 0).setScale(1);
 
     const inventoryWindow = createInventoryWindow(this, 640, 320);
     const itemBox = createItemBox(this, inventoryWindow);
