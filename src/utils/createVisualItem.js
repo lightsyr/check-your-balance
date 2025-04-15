@@ -25,7 +25,7 @@ export function createVisualItem(scene, item, onClick) {
       })
       .setOrigin(0.5, 0)
       .setVisible(false)
-      .setScrollFactor(0);
+      .setScrollFactor(0)
   
     container.add([hoverBorder, itemImage, tooltip]);
     container.setSize(itemImage.width, itemImage.height);
@@ -38,7 +38,7 @@ export function createVisualItem(scene, item, onClick) {
     itemImage.on("pointerover", () => {
       hoverBorder.setVisible(true);
       tooltip.setVisible(true);
-      tooltip.setPosition(itemImage.x, itemImage.y - itemImage.height / 2 - 10);
+      tooltip.setPosition(itemImage.x, itemImage.y - itemImage.height / 2 - 30);
     });
     itemImage.on("pointerout", () => {
       hoverBorder.setVisible(false);

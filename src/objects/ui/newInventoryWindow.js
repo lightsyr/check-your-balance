@@ -1,7 +1,10 @@
 import Phaser from "phaser";
 import inventory from "../../data/inventory";
 import { createVisualItem } from "../../utils/createVisualItem";
-import { Sizer } from "phaser3-rex-plugins/templates/ui/ui-components";
+import {
+  GridSizer,
+  Sizer,
+} from "phaser3-rex-plugins/templates/ui/ui-components";
 import { moveItemContainer } from "../../utils/moveItemContainer";
 
 export default class InventoryWindow {
@@ -18,18 +21,19 @@ export default class InventoryWindow {
     this.mainContainer = new Sizer(scene, {
       x,
       y,
-      width: 600,
+      width: 320,
       height: 200,
       orientation: "vertical",
       space: { item: 10 },
     });
 
-    this.itemsContainer = new Sizer(scene, {
-      width: 600,
+    this.itemsContainer = new GridSizer(scene, {
+      width: 320,
       height: 160,
       orientation: "horizontal",
       anchor: "center",
-      space: { item: 10 },
+      column: 5,
+      row: 1,
     });
 
     const background = scene.add.rectangle(
@@ -64,7 +68,11 @@ export default class InventoryWindow {
     this.itemsContainer.clear(true);
     inventory.getItems().forEach((item) => {
       const itemContainer = createVisualItem(this.scene, item, (container) => {
-        moveItemContainer(container, this.itemsContainer, this.showCase.itemsContainer);
+        moveItemContainer(
+          container,
+          this.itemsContainer,
+          this.showCase.itemsContainer
+        );
         inventory.removeItem(item);
         this.showCase.addItem(item);
       });
