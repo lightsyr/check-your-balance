@@ -1,35 +1,40 @@
-import Window from "./window";
+import { Sizer } from "phaser3-rex-plugins/templates/ui/ui-components.js";
 import { startMoney } from "../../data/globals";
 
-export default class MoneyWindow extends Window{
-    /**
-     * * Create a money window
-     * @param {Phaser.Scene} scene - The scene to which the window will be added.
-     * @param {number} x - The x position of the window.
-     * @param {number} y - The y position of the window.
-     * @param {number} width - The width of the window.
-     * @param {number} height - The height of the window.
-     *  */
-    constructor(scene, x, y, width = 300, height = 200,){
-        super(scene, x, y, width, height, false);
-        this.scene = scene;
+export default function createMoneyWindows(scene) {
+  let moneyWindowSizer = new Sizer(scene, {
+    anchor: "left",
+    x: 1280 - 180,
+    y: 60,
+    orientation: "x",
+    space: {
+      item: 10,
+    },
+  });
 
-        // create the money text and add to money window
-        const moneyText = this.scene.add.text(0, 0, "Money:" + startMoney, {
-            fontSize: "16px",
-            fill: "#fff",
-            // set the wraping 
-            wordWrap: { width: 1000, useAdvancedWrap: true },
-        })
+  moneyWindowSizer.addBackground(
+    scene.add.rectangle(
+      0,
+      0,
+      moneyWindowSizer.width + 10,
+      moneyWindowSizer.height + 10,
+      0x222222,
+      0.95
+    )
+  );
 
-        this.addItem(moneyText)
-        
-        // create money sprite
-        const coinSprite = this.scene.add.image(0, 0, "coin").setOrigin(0.5, 0.5).setScale(0.2);
-        this.addItem(coinSprite)
+  const moneyIcon = scene.add.image(0, 0, "coin").setScale(0.2);
 
+  moneyWindowSizer.add(moneyIcon);
 
-        moneyText.setPosition(coinSprite.x + 25, 0)
-        
-    }
+  const moneyText = scene.add.text(0, 0, "$Money:" + startMoney, {
+    color: "#fff",
+    fontSize: "32px",
+  });
+
+  moneyWindowSizer.add(moneyText);
+
+  scene.add.existing(moneyWindowSizer);
+
+  moneyWindowSizer.layout();
 }
