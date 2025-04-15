@@ -1,5 +1,5 @@
 export default class Window extends Phaser.GameObjects.Container {
-    constructor(scene, x, y, width = 300, height = 200) {
+    constructor(scene, x, y, width = 300, height = 200, isClosable = true) {
       super(scene, x, y);
       this.scene = scene;
       this.width = width;
@@ -20,7 +20,11 @@ export default class Window extends Phaser.GameObjects.Container {
       this.content = scene.add.container(-width / 2 + 40, -height / 2 + 40); // small margin
   
       // Add elements to the window
-      this.add([this.background, this.closeButton, this.content]);
+      this.add([this.background, this.content]);
+
+      if(isClosable) {
+        this.add(this.closeButton)
+      }
   
       // Add the window to the scene
       scene.add.existing(this);

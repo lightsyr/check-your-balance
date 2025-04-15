@@ -1,8 +1,9 @@
 import itensCategories from "../data/itemCategories.json";
 import items from "../data/items.json";
 import inventory from "../data/inventory";
-import { gameDificulty } from "../data/globals";
+import { gameDificulty, startMoney } from "../data/globals";
 import Window from "../objects/ui/window";
+import MoneyWindow from "../objects/ui/moneyWindow";
 
 export default class Pregame extends Phaser.Scene {
     constructor() {
@@ -12,6 +13,7 @@ export default class Pregame extends Phaser.Scene {
     preload() {
         // load the close button image
         this.load.image("close", "assets/images/ui/close.png");
+        this.load.image("coin", "assets/images/ui/coin.png");
     }
 
     create() {
@@ -52,13 +54,18 @@ export default class Pregame extends Phaser.Scene {
 
 
         // create the inventory windows
-        const inventoryWindow = new Window(this, this.cameras.main.centerX, this.cameras.main.centerY + 100, 480, 320);
+        const inventoryWindow = new Window(this, this.cameras.main.centerX, this.cameras.main.centerY + 100, 360, 240);
+
+        inventoryWindow.setVisible(false)
+
+        const moneyWindow = new MoneyWindow(this, this.cameras.default.width - 150, 100, 200, 100);
+        moneyWindow.setVisible(false)
 
         const inventoryText = this.add.text(0,0, "Inventory", {
             fontSize: "32px",
             fill: "#fff",
             // set the wraping 
-            wordWrap: { width: 1000, useAdvancedWrap: true },
+            wordWrap: { width: 600, useAdvancedWrap: true },
         })
 
         inventoryWindow.addItem(inventoryText)
@@ -67,12 +74,15 @@ export default class Pregame extends Phaser.Scene {
         this.time.addEvent({
             delay: 5000,
             callback: () => {
+                inventoryWindow.setVisible(true)
+                moneyWindow.setVisible(true)
                 this.tweens.add({
                     targets: introText,
                     alpha: 0,
                     duration: 1000,
                     onComplete: () => {
                         introText.destroy();
+                        
                     }
                 });
 
