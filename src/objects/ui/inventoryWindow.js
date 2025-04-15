@@ -42,11 +42,7 @@ export default function createInventoryWindow(scene, x, y) {
     space: { column: 5, row: 5 },
   });
 
-  const background = scene.add.rectangle(0, 0, 600, 200, 0x222222)
-    .setStrokeStyle(2, 0xffffff); // opcional: borda branca
-
-  mainContainer.addBackground(background);
-
+  
   // Métodos adicionados ao GridSizer
   let itemsBoxSizer = null;
 

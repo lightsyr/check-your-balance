@@ -1,13 +1,12 @@
-import itemCategories from "../data/itemCategories.json";
-import items from "../data/items.json";
-import inventory from "../data/inventory";
-import { gameDificulty, startMoney } from "../data/globals";
-import Window from "../objects/ui/window";
-import { Sizer } from "phaser3-rex-plugins/templates/ui/ui-components.js";
+import Phaser from "phaser";
 import createItemBox from "../objects/ui/itemBox";
 import createMoneyWindow from "../objects/ui/moneyWindow";
 import createInventoryWindow from "../objects/ui/inventoryWindow";
 import Link from "../objects/ui/link";
+import createNewInventoryWindow from "../objects/ui/newInventoryWindow";
+import createNewShowCaseWindow from "../objects/ui/createNewShowCaseWindow";
+import InventoryWindow from "../objects/ui/newInventoryWindow";
+import ShowCaseWindow from "../objects/ui/newShowCaseWidnow";
 
 export default class Pregame extends Phaser.Scene {
   constructor() {
@@ -26,14 +25,18 @@ export default class Pregame extends Phaser.Scene {
     // add background image
     this.add.image(0, 0, "store_bg").setOrigin(0, 0).setScale(1);
 
-    const inventoryWindow = createInventoryWindow(this, 640, 320);
-    const itemBox = createItemBox(this, inventoryWindow);
+    this.showCaseWindow = new ShowCaseWindow(this, 640, 640)
+    this.inventoryWindow = new InventoryWindow(this, 640, 320)
 
-    inventoryWindow.setItemBox(itemBox);
+    this.inventoryWindow.setShowCase(this.showCaseWindow)
+
+    // const itemBox = createItemBox(this, inventoryWindow);
+
+   // inventoryWindow.setItemBox(itemBox);
 
     // Renderiza os dois arrays globais (ordem correta agora!)
-    itemBox.mount(); // showCase vem para cá
-    inventoryWindow.mount(); // e inventory aqui
+    // itemBox.mount(); // showCase vem para cá
+    // inventoryWindow.mount(); // e inventory aqui
 
     const moneyWindow = createMoneyWindow(this);
 

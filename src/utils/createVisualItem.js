@@ -1,4 +1,11 @@
 // utils/createVisualItem.js
+/** 
+ * Creates a visual representation of an item in the game.
+ * * @param {Phaser.Scene} scene - The scene to which the item belongs.
+ * * @param {Object} item - The item to be represented.
+ * * @param {Function} onClick - The function to be called when the item is clicked.
+ * * @return {Phaser.GameObjects.Container} The created visual item container.
+*/
 export function createVisualItem(scene, item, onClick) {
     const container = scene.add.container(0, 0);
   
@@ -37,6 +44,7 @@ export function createVisualItem(scene, item, onClick) {
       hoverBorder.setVisible(false);
       tooltip.setVisible(false);
     });
+
   
     return container;
   }

@@ -7,6 +7,8 @@ import items from "../data/items.json"; // todos os itens disponíveis
 let initialized = false;
 
 export function initializeGameState() {
+  console.log(initialized)
+
   if (initialized) return;
 
   // Define tamanhos do inventário por dificuldade
