@@ -30,14 +30,6 @@ export default class Pregame extends Phaser.Scene {
 
     this.inventoryWindow.setShowCase(this.showCaseWindow)
 
-    // const itemBox = createItemBox(this, inventoryWindow);
-
-   // inventoryWindow.setItemBox(itemBox);
-
-    // Renderiza os dois arrays globais (ordem correta agora!)
-    // itemBox.mount(); // showCase vem para cá
-    // inventoryWindow.mount(); // e inventory aqui
-
     const moneyWindow = createMoneyWindow(this);
 
     const goGameLink = new Link(this, 640, 120, "Confirm and to Menu", {}, () => {
