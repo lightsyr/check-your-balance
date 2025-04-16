@@ -25,7 +25,7 @@ export default class Queue{
     }
     updateQueue(){
         this.queue.forEach((costumer, index) => {
-            costumer.setPosition(500 + index * 200, this.scene.cameras.main.height / 2)
+            costumer.setPosition(500 + index * 200, this.scene.cameras.main.height / 2 + 100)
         })
     }
     getCurrentCostumer(){

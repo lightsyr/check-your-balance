@@ -6,6 +6,7 @@ export default class tradeManager{
         this.startMoney = startMoney
         this.money = startMoney
         this.currentCostumer = null
+        this.state = "startingTrade"
     }
 
     startTrade(){
