@@ -48,4 +48,15 @@ export default class Costumer extends Phaser.GameObjects.Sprite{
             }
         })
     }
+
+    startPatienceCountdown() {
+        this.scene.time.addEvent({
+            delay: 1000, // Reduz a paciência a cada 1 segundo
+            callback: () => {
+                this.dealDamage(5); // Reduz 5 pontos de paciência
+            },
+            callbackScope: this,
+            loop: true,
+        });
+    }
 }

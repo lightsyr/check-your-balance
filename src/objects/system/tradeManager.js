@@ -1,36 +1,38 @@
-export default class tradeManager{
-    constructor(scene, queue, gameDifficulty, startMoney){
-        this.scene = scene
-        this.queue = queue
-        this.gameDifficulty = gameDifficulty
-        this.startMoney = startMoney
-        this.money = startMoney
-        this.currentCostumer = null
-        this.state = "startingTrade"
-    }
+export default class TradeManager {
+  constructor(scene, queue, gameDifficulty, startMoney, showcase) {
+    this.scene = scene;
+    this.queue = queue;
+    this.gameDifficulty = gameDifficulty;
+    this.money = startMoney;
+    this.currentCostumer = null;
+    this.currentItem = null; // Item atualmente em negociação
+    this.showcase = showcase; // Referência à vitrine
+    this.state = "startingTrade";
+  }
 
-    startTrade(){
-        if(this.queue.getCurrentCostumer()){
-            this.currentCostumer = this.queue.getCurrentCostumer()
-            this.currentCostumer.tradeOffer()
-        }
+  startTrade() {
+    if (this.queue.getCurrentCostumer() && this.showcase.getItems().length > 0) {
+      this.currentCostumer = this.queue.getCurrentCostumer();
+      this.currentItem = this.showcase.getItems()[0]; // Seleciona o primeiro item da vitrine
+      console.log(`Negotiating item: ${this.currentItem.name} with price ${this.currentItem.value}`);
+      this.currentCostumer.tradeOffer();
+    } else {
+      console.log("No customers or items available for trade.");
     }
+  }
 
-    finishTrade(result){
-        if(result.sucess){
-            // add money to player
-            this.money += 10
-            this.queue.remove(this.currentCostumer)
-            this.currentCostumer.removeFromQueueAnimation()
-            this.currentCostumer = null
-        }else{
-            // remove money from player
-            this.money -= 10
-            if(this.money <= 0){
-                // game over
-                console.log("Game Over")
-                this.scene.scene.start("GameOverScene")
-            }
-        }
+  finishTrade(success) {
+    if (success) {
+      this.money += this.currentItem.value; // Adiciona o preço do item ao dinheiro do jogador
+      console.log(`Trade successful! Earned ${this.currentItem.value}. Total money: ${this.money}`);
+      this.showcase.removeItem(0); // Remove o item negociado da vitrine
+      this.queue.remove(this.currentCostumer); // Remove o cliente atual da fila
+      this.currentCostumer = null;
+      this.currentItem = null; // Limpa o item atual
+    } else {
+      console.log("Trade failed. Customer left.");
+      this.queue.remove(this.currentCostumer); // Remove o cliente atual da fila
+      this.currentCostumer = null;
     }
+  }
 }

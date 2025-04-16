@@ -20,13 +20,31 @@ export default class Queue{
     add(costumer){
         this.queue.push(costumer)
     }
-    remove(costumer){
-        this.queue = this.queue.filter(c => c !== costumer)
+    remove(costumer) {
+        this.scene.tweens.add({
+            targets: costumer,
+            alpha: 0, // Reduz a opacidade até 0
+            duration: 500, // Duração do tween em milissegundos
+            ease: "Power2",
+            onComplete: () => {
+                // Após o tween, remove o cliente da fila
+                this.queue = this.queue.filter((c) => c !== costumer);
+                costumer.destroy(); // Remove o objeto da cena
+                this.updateQueue(); // Atualiza a fila
+            },
+        });
     }
-    updateQueue(){
+    updateQueue() {
+        const startX = 430; // Posição inicial no eixo X
+        const startY = 400; // Posição no eixo Y
+        const spacing = 150; // Espaçamento entre os clientes
+
         this.queue.forEach((costumer, index) => {
-            costumer.setPosition(500 + index * 200, this.scene.cameras.main.height / 2 + 100)
-        })
+            costumer.setPosition(startX + index * spacing, startY); // Posiciona os clientes em linha
+        });
+
+        // Atualiza o cliente atual
+        this.currentCostumer = this.queue[0];
     }
     getCurrentCostumer(){
         return this.queue[0]

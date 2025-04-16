@@ -1,12 +1,18 @@
 import Card from "./card";
 
-// Deck Class
 export default class Deck {
   /**
-   * @param {Card[]} cards
+   * @param {Object[]} cardsData - Array de objetos representando as cartas.
    */
-  constructor(cards) {
-    this.cards = cards;
+  constructor(cardsData) {
+    this.cards = [];
+
+    // Adiciona 4 cópias de cada carta ao deck
+    cardsData.forEach((cardData) => {
+      for (let i = 0; i < 4; i++) {
+        this.cards.push({ ...cardData }); // Cria uma cópia da carta
+      }
+    });
   }
 
   addCard(card) {
